@@ -78,8 +78,8 @@ public class JogadorTeste {
 	public void deveJogar() {
 		historico.jogar();
 		
+		System.out.println(historico.getListaDaListaDeJogadas());
 		assertEquals(1, historico.getRound());
-		assertEquals(0, sc.getValor());
 		
 	}
 }
