@@ -1,6 +1,4 @@
-package br.com.warline.teste;
-
-import br.com.warline.modelo.Jogador;
+package br.com.warline.modelo;
 
 public class Estado {
 	private String nome;
@@ -14,6 +12,10 @@ public class Estado {
 		this.valor = valor;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+	
 	public void adicionarJogador(Jogador jogador) {
 		this.jogador = jogador;
 		jogador.adicionarEstado(this);
@@ -30,4 +32,11 @@ public class Estado {
 	public Integer getValor() {
 		return valor;
 	}
+
+	@Override
+	public String toString() {
+		return "Estado [nome=" + nome + ", valor=" + valor + ", jogador=" + jogador + "]";
+	}
+	
+	
 }
