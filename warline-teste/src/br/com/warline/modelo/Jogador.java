@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.common.ParsingContextSnapshot;
 
-import br.com.warline.teste.Atribuicao;
-
 public class Jogador {
 	private String nome;
 	private Integer pontos = 5; 
