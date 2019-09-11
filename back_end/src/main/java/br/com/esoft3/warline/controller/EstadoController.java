@@ -8,19 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.esoft3.warline.modelo.Estado;
-import br.com.esoft3.warline.modelo.Jogador;
 import br.com.esoft3.warline.repository.EstadoRepository;
-import br.com.esoft3.warline.repository.JogadorRepository;
 
-@RequestMapping("/api/jogador")
+@RequestMapping("/api/estado")
 @RestController
-public class JogadorController {
-
+public class EstadoController {
+	
 	@Autowired
-	JogadorRepository jogadorRepository;
+	EstadoRepository estadoRepository;
 	
 	@GetMapping
-	public List<Jogador> getAll() {
-		return jogadorRepository.findAll();
+	public List<Estado> getAll() {
+		return estadoRepository.findAll();
 	}
+	
 }

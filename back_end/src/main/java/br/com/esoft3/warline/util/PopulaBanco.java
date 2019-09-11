@@ -1,17 +1,14 @@
 package br.com.esoft3.warline.util;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import br.com.esoft3.warline.modelo.Estado;
 import br.com.esoft3.warline.modelo.Jogador;
-import br.com.esoft3.warline.modelo.Pais;
+import br.com.esoft3.warline.repository.EstadoRepository;
 import br.com.esoft3.warline.repository.JogadorRepository;
-import br.com.esoft3.warline.repository.PaisRepository;
 
 @Component
 public class PopulaBanco {
@@ -20,35 +17,33 @@ public class PopulaBanco {
 	private JogadorRepository jogadorRepository;
 	
 	@Autowired
-	private PaisRepository paisRepository;
+	private EstadoRepository estadoRepository;
 	
 	@EventListener
 	public void appReady(ApplicationReadyEvent event) {
-		Pais pr = new Pais("parana", 2);
-		Pais sc = new Pais("santa catarina", 2);
-		Pais sp = new Pais("sao paulo", 2);
-		Pais rj = new Pais("rio de janeiro", 2);
-		Pais mg = new Pais("minas gerais", 2);
-		Pais rs = new Pais("rio grande do sul", 2);
 		
-		paisRepository.save(pr);
-		paisRepository.save(sc);
-		paisRepository.save(sp);
-		paisRepository.save(rj);
-		paisRepository.save(mg);
-		paisRepository.save(rs);
+		Estado pr = new Estado("PR","parana", 2);
+		Estado sc = new Estado("SC","santa catarina", 2);
+		Estado sp = new Estado("SP","sao paulo", 2);
+		Estado rj = new Estado("RJ","rio de janeiro", 2);
+		Estado mg = new Estado("MG","minas gerais", 2);
+		Estado rs = new Estado("RS","rio grande do sul", 2);
 		
-		Jogador adriano = new Jogador("adriano", 5);
-		Jogador computador = new Jogador("computador", 5);
+		estadoRepository.save(pr);
+		estadoRepository.save(sc);
+		estadoRepository.save(sp);
+		estadoRepository.save(rj);
+		estadoRepository.save(mg);
+		estadoRepository.save(rs);
+		
+		Jogador adriano = new Jogador("adriano");
+		Jogador computador = new Jogador("computador");
 		
 		jogadorRepository.save(adriano);
-		
-		adriano.adicionarPais(pr);
-		paisRepository.save(pr);
-		jogadorRepository.save(adriano);
-		
 		jogadorRepository.save(computador);
 		
+		adriano.adicionarEstado(pr);
+		jogadorRepository.save(adriano);
 	}
 
 
