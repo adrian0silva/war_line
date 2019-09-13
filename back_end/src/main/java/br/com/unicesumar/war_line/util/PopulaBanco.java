@@ -1,14 +1,14 @@
-package br.com.esoft3.warline.util;
+package br.com.unicesumar.war_line.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import br.com.esoft3.warline.modelo.Estado;
-import br.com.esoft3.warline.modelo.Jogador;
-import br.com.esoft3.warline.repository.EstadoRepository;
-import br.com.esoft3.warline.repository.JogadorRepository;
+import br.com.unicesumar.war_line.modelo.Estado;
+import br.com.unicesumar.war_line.modelo.Jogador;
+import br.com.unicesumar.war_line.repository.EstadoRepository;
+import br.com.unicesumar.war_line.repository.JogadorRepository;
 
 @Component
 public class PopulaBanco {
@@ -22,7 +22,7 @@ public class PopulaBanco {
 	@EventListener
 	public void appReady(ApplicationReadyEvent event) {
 		
-		Estado pr = new Estado("PR","parana", 2);
+		Estado pr = new Estado("PR","parana", 5456465);
 		Estado sc = new Estado("SC","santa catarina", 2);
 		Estado sp = new Estado("SP","sao paulo", 2);
 		Estado rj = new Estado("RJ","rio de janeiro", 2);
@@ -43,7 +43,14 @@ public class PopulaBanco {
 		jogadorRepository.save(computador);
 		
 		adriano.adicionarEstado(pr);
+		estadoRepository.save(pr);
 		jogadorRepository.save(adriano);
+		
+		computador.adicionarEstado(rj);
+		estadoRepository.save(rj);
+		jogadorRepository.save(computador);
+		
+		
 	}
 
 

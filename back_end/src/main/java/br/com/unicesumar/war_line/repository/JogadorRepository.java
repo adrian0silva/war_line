@@ -1,8 +1,8 @@
-package br.com.esoft3.warline.repository;
+package br.com.unicesumar.war_line.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.esoft3.warline.modelo.Jogador;
+import br.com.unicesumar.war_line.modelo.Jogador;
 
 public interface JogadorRepository extends JpaRepository<Jogador, Long>{
 

@@ -1,11 +1,11 @@
-package br.com.esoft3.warline.modelo;
+package br.com.unicesumar.war_line.modelo;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Estado {
@@ -18,6 +18,8 @@ public class Estado {
 
 	private Integer valor;
 
+	@ManyToOne
+	private Jogador jogador;
 
 	public Estado() {
 	}
@@ -28,6 +30,14 @@ public class Estado {
 		this.valor = valor;
 	}
 
+	public Jogador getJogador() {
+		return jogador;
+	}
+	
+	public void setJogador(Jogador jogador) {
+		this.jogador = jogador;
+	}
+	
 	public Long getId() {
 		return id;
 	}

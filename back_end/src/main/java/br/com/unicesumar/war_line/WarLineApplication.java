@@ -1,14 +1,13 @@
-package br.com.esoft3.warline;
+package br.com.unicesumar.war_line;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WarlineApplication {
+public class WarLineApplication {
 
 	public static void main(String[] args) {
-	
-		SpringApplication.run(WarlineApplication.class, args);
+		SpringApplication.run(WarLineApplication.class, args);
 	}
 
 }

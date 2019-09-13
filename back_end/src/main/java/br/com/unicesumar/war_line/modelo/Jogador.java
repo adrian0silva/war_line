@@ -1,4 +1,4 @@
-package br.com.esoft3.warline.modelo;
+package br.com.unicesumar.war_line.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,6 @@ public class Jogador {
 	@OneToMany
 	private List<Estado> estados = new ArrayList<>();
 	
-	
 	public Jogador() {
 	}
 	
@@ -34,6 +33,7 @@ public class Jogador {
 	
 	public void adicionarEstado(Estado estado) {
 		this.estados.add(estado);
+		estado.setJogador(this);
 	}
 	
 	public Long getId() {
