@@ -13,7 +13,7 @@ public class Estado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String UF;
+	private String uf;
 	private String nome;
 
 	private Integer valor;
@@ -25,7 +25,7 @@ public class Estado {
 	}
 	
 	public Estado(String UF, String nome, Integer valor) {
-		this.UF = UF;
+		this.uf = UF;
 		this.nome = nome;
 		this.valor = valor;
 	}
@@ -42,8 +42,8 @@ public class Estado {
 		return id;
 	}
 
-	public String getUF() {
-		return UF;
+	public String getUf() {
+		return uf;
 	}
 
 	public String getNome() {

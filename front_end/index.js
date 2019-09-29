@@ -1,6 +1,3 @@
-var paraiba = document.getElementsByName("Paraíba");
-
-paraiba[0].children[0].style.fill = "yellow";
 
 var resposta = $.get("http://localhost:8080/api/estado").done(function (data) {
     atualizarEstado(data);
@@ -10,7 +7,7 @@ var resposta = $.get("http://localhost:8080/api/estado").done(function (data) {
 
 function atualizarEstado(data) {
 
-    for (let a = 0; a < (data.length - 1); a++) {
+    for (let a = 0; a < 3; a++) {
 
         estadoAncora = document.getElementsByName(""+data[a].nome);
         estado = estadoAncora[0].children[0];
@@ -36,5 +33,30 @@ function atualizarEstado(data) {
           estado.style.fill = "gray";
       }*/
 }
+var e;
+var ordem;
+var ordemData;
+var array;
 
+$("a").click(function(evento){
+    adicionarPontos(evento.currentTarget);
+});
 
+function adicionarPontos(target) {
+    $.ajax({
+        url: 'http://localhost:8080/api/jogador/'+target.children[0].id,
+        type: 'PUT',
+        success: function(result) {
+            
+        }
+    }).then($.get('http://localhost:8080/api/atribuicao',function(data){
+        ordem = $("#ordens");
+        ordemData = data;
+        $('#ordens')[0].innerHTML = "";
+        for(var a = 0;a < data.length;a++){
+            $("#ordens").append(`<h1> Deploy `+data[a].pontos+
+            ` to `+ data[a].nomeEstado +`  </h1>`);
+        }
+        /*; */
+    }));
+}

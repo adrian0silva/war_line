@@ -6,4 +6,8 @@ import br.com.unicesumar.war_line.modelo.Estado;
 
 public interface EstadoRepository extends JpaRepository<Estado, Long>{
 
+	Estado findByNome(String nomeEstado);
+
+	Estado findByUf(String uf);
+
 }

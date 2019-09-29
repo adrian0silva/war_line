@@ -22,7 +22,7 @@ public class PopulaBanco {
 	@EventListener
 	public void appReady(ApplicationReadyEvent event) {
 		
-		Estado pr = new Estado("PR","parana", 5456465);
+		Estado pr = new Estado("PR","parana", 2);
 		Estado sc = new Estado("SC","santa catarina", 2);
 		Estado sp = new Estado("SP","sao paulo", 2);
 		Estado rj = new Estado("RJ","rio de janeiro", 2);
@@ -46,10 +46,13 @@ public class PopulaBanco {
 		estadoRepository.save(pr);
 		jogadorRepository.save(adriano);
 		
+		adriano.adicionarEstado(sc);
+		estadoRepository.save(sc);
+		jogadorRepository.save(adriano);
+		
 		computador.adicionarEstado(rj);
 		estadoRepository.save(rj);
 		jogadorRepository.save(computador);
-		
 		
 	}
 

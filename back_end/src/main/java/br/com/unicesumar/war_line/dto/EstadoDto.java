@@ -18,7 +18,7 @@ public class EstadoDto {
 	
 	public EstadoDto(Estado estado) {
 		this.id = estado.getId().toString();
-		UF = estado.getUF();
+		UF = estado.getUf();
 		this.nome = estado.getNome();
 		this.valor = estado.getValor();
 		
