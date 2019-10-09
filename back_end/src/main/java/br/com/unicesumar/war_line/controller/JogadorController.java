@@ -45,6 +45,14 @@ public class JogadorController {
 		Estado estado = estadoRepository.findByUf(uf);
 		Jogador jogador = estado.getJogador();
 		
+
+		if(jogador.getPontos() == 0) {
+			throw new RuntimeException("Jogador nao possui pontos para atribuir!");
+		}
+		
+		
+		jogador.setPontos(jogador.getPontos() - 1);
+		
 		List<Atribuicao> listaAtribuicao = atribuicaoRepository.buscarAtribuicao(estado.getId());
 		
 		System.out.println(listaAtribuicao.size());

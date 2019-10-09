@@ -34,6 +34,10 @@ public class Jogador {
 		this.nome = nome;
 	}
 
+	public void setPontos(Integer pontos) {
+		this.pontos = pontos;
+	}
+	
 	public void adicionarEstado(Estado estado) {
 		this.estados.add(estado);
 		estado.setJogador(this);
