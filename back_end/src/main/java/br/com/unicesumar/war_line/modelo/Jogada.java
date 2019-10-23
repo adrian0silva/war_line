@@ -18,6 +18,15 @@ public class Jogada {
 	private Estado estadoRecebe;
 	private int valor;
 
+	public Jogada() {
+	}
+	
+	public Jogada(Estado estadoEnvia, Estado estadoRecebe, int valor) {
+		this.estadoEnvia = estadoEnvia;
+		this.estadoRecebe = estadoRecebe;
+		this.valor = valor;
+	}
+
 	public Long getId() {
 		return id;
 	}

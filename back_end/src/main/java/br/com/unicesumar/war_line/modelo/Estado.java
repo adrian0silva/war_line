@@ -54,5 +54,11 @@ public class Estado {
 		return valor;
 	}
 
-
+	public void adicionarValorAleatorio(Integer valor) {
+		this.valor = valor;
+	}
+	
+	public void setValor(Integer valor) {
+		this.valor = valor;
+	}
 }

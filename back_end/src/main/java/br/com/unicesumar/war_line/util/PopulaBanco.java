@@ -19,8 +19,10 @@ public class PopulaBanco {
 	@Autowired
 	private EstadoRepository estadoRepository;
 	
+	
 	@EventListener
 	public void appReady(ApplicationReadyEvent event) {
+		
 		
 		Estado pr = new Estado("PR","parana", 2);
 		Estado sc = new Estado("SC","santa catarina", 2);

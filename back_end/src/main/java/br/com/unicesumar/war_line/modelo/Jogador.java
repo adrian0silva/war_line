@@ -17,7 +17,8 @@ public class Jogador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@OneToMany
+	private List<Jogada> jogadas = new ArrayList<>();
 	private String nome;
 	private Integer pontos = 5;
 
@@ -32,6 +33,10 @@ public class Jogador {
 
 	public Jogador(String nome) {
 		this.nome = nome;
+	}
+
+	public void setPontos(Integer pontos) {
+		this.pontos = pontos;
 	}
 
 	public void adicionarEstado(Estado estado) {
@@ -54,7 +59,7 @@ public class Jogador {
 	public List<Estado> getEstados() {
 		return estados;
 	}
-	
+
 	public Atribuicao adicionarPontos(Estado estado, Integer pontos) {
 		Atribuicao atribuicao = new Atribuicao(this, estado, pontos);
 		this.atribuicoes.add(atribuicao);
@@ -63,5 +68,8 @@ public class Jogador {
 
 	public List<Atribuicao> getAtribuicoes() {
 		return atribuicoes;
+	}
+	public void adicionarJogada(Jogada jogada) {
+		this.jogadas.add(jogada);
 	}
 }
