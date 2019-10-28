@@ -16,21 +16,25 @@ import br.com.unicesumar.war_line.repository.EstadoRepository;
 
 @RequestMapping("/api/estado")
 @RestController
+@CrossOrigin("*")
 public class EstadoController {
 	
 	@Autowired
 	EstadoRepository estadoRepository;
 	
 	@GetMapping
-	@CrossOrigin
 	public List<EstadoDto> getAll() {
 		List<Estado> estados = estadoRepository.findAll();
 		return EstadoDto.converter(estados);
 	}
 	
-	@GetMapping("{id}")
-	@CrossOrigin
+	@GetMapping("busca-pelo-nome/{id}")
 	public EstadoDto getOne(@PathVariable("id") Long id) {
 		return new EstadoDto(estadoRepository.findById(id).get());
+	}
+
+	@GetMapping("busca-pelo-uf/{uf}")
+	public EstadoDto buscaPeloUf(@PathVariable("uf") String uf) {
+		return new EstadoDto(estadoRepository.findByUf(uf));
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.unicesumar.war_line.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,13 @@ public class JogadorController {
 	@CrossOrigin
 	public void adicionarPontos(@PathVariable("nome") String uf) {
 		Estado estado = estadoRepository.findByUf(uf);
+		
+		if(estado.getJogador() == null || estado.getJogador().getId() == 2) {
+			throw new RuntimeException("Não potchi, este estado não lha pertence!");
+		}
+		
 		Jogador jogador = estado.getJogador();
 		
-
 		if(jogador.getPontos() == 0) {
 			throw new RuntimeException("Jogador nao possui pontos para atribuir!");
 		}
@@ -66,14 +71,17 @@ public class JogadorController {
 		
 		System.out.println(listaAtribuicao.size());
 		
+		
 		if(listaAtribuicao.size() == 0) {
 			Atribuicao atribuicao = jogador.adicionarPontos(estado, 1);
+			estado.setValor(estado.getValor() + 1);
 			atribuicaoRepository.save(atribuicao);
 			jogadorRepository.save(jogador);
 			estadoRepository.save(estado);
 		} else {
 			Atribuicao atribuicao = atribuicaoRepository.buscar(estado.getId());
 			atribuicao.setPontos(atribuicao.getPontos() + 1);
+			estado.setValor(estado.getValor() + 1);
 			atribuicaoRepository.save(atribuicao);
 			jogadorRepository.save(jogador);
 			estadoRepository.save(estado);
@@ -88,10 +96,54 @@ public class JogadorController {
 	public void adicionarJogada(@PathVariable("id") Long id, @RequestBody Jogada jogada) {
 		Jogador jogador = jogadorRepository.findById(id).get();
 		
+		Estado estadoEnvia = estadoRepository.findById(jogada.getEstadoEnvia().getId()).get();
 		
-		jogador.adicionarJogada(jogada);
+		Estado estadoRecebe = estadoRepository.findById(jogada.getEstadoRecebe().getId()).get();
+		
+		
+		System.out.println("Valor da jogada!: " + jogada.getValor());
+		
+		System.out.println("Valor do estado: " + estadoEnvia.getValor());
+		
+		if(estadoEnvia.getId() == estadoRecebe.getId()) {
+			throw new RuntimeException("Voce nao pode mandar para o mesmo estado");
+		}
+		
+		if(estadoEnvia.getJogador().getId() != jogador.getId()) {
+			throw new RuntimeException("Este estado não lhe pertence!");
+		}
+		
+		if(jogada.getValor() <= 0  || jogada.getValor() > estadoEnvia.getValor()) {
+			throw new RuntimeException("Valor não pode ser 0,negativo ou maior que os pontos do estado que envia");
+		}
+		
+	
+		
+		List<Jogada> jogadasIguais = jogadaRepository.buscarCombinacao(estadoEnvia.getId(), estadoRecebe.getId());
+		
+		if(jogadasIguais.size() > 0) {
+			
+			Jogada jogadaEncontrada = jogadasIguais.get(0);
+			jogadaEncontrada.setValor(jogadaEncontrada.getValor() + jogada.getValor());
+			estadoEnvia.setValor(estadoEnvia.getValor() - jogada.getValor());
+			
+			estadoRepository.save(estadoEnvia);
+			estadoRepository.save(estadoRecebe);
+			jogadaRepository.save(jogadaEncontrada);
+			jogadorRepository.save(jogador);
+			return;
+		}
+		
+		jogada = new Jogada(estadoEnvia, estadoRecebe, jogada.getValor());
+		
+		estadoEnvia.setValor(estadoEnvia.getValor() - jogada.getValor());
+		
+		estadoRepository.save(estadoEnvia);
+		estadoRepository.save(estadoRecebe);
 		jogadaRepository.save(jogada);
+		jogador.adicionarJogada(jogada);
 		jogadorRepository.save(jogador);
+		
 	}
 
 	@GetMapping("/{id}/jogadas")

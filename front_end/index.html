@@ -5,14 +5,16 @@
   <meta charset="UTF-8">
   <title>Mapa do Brasil SVG</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="index.css">
-  
+  <link rel="stylesheet" href="assets/css/index.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 
 <body>
+
 
   <div style="position:absolute; left:422px; top: 123px; background: black;" >k</div>
 
@@ -49,12 +51,12 @@
         fill: #003399 !important;
         cursor: pointer
       }
+      .arrow{
+      stroke:rgb(0,0,0);
+      stroke-width:2; 
+      marker-end:url(#markerArrow)
+    }
     </style>
-
-  <div id="pontos"></div>
-
-  
-
     <svg version="1.1" id="svg-map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
       x="0px" y="0px" width="450px" height="460px" viewBox="0 0 450 460" enable-background="new 0 0 450 460"
       xml:space="preserve">
@@ -65,6 +67,8 @@
         S234.852,233.695,289.558,235.641z"></path>
           <text transform="matrix(1 0 0 1 287.0137 188.3208)" fill="#FFFFFF">TO</text>
         </a>
+
+
         <a xlink:href="#bahia" class="estado" name="Bahia" code="29">
           <path stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round"
             d="M313.276,197.775
@@ -74,8 +78,11 @@
         c-3.669,6.574-6.846,16.022-13.966,17.747c-5.808,1.411-4.605,13.421-5.178,18.037c-0.465,3.75,0.192,8.448,1.014,12.117
         c1.148,4.959-0.821,8.6-1.808,13.42c-0.822,4.162-0.219,8.299-0.987,12.297c-0.271,1.286-4.407,5.723-5.559,7.148
         c-1.616-1.426-63.952-37.248-73.1-36.265c1.149-3.738,2.438-9.559-0.741-12.723c-8.625-8.572-0.135-19.335-0.162-19.432
-        c-0.546-1.725-5.396-6.079-0.026-7.175c-3.175,0.959-1.944-4.027,0.875-3.012C316.726,200.733,314.044,200.527,313.276,197.775z"></path>
+        c-0.546-1.725-5.396-6.079-0.026-7.175c-3.175,0.959-1.944-4.027,0.875-3.012C316.726,200.733,314.044,200.527,313.276,197.775z">
+        </path>
           <text transform="matrix(1 0 0 1 359.7324 210.1221)" fill="#FFFFFF">BA</text>
+
+
         </a>
         <a xlink:href="#sergipe" class="estado" name="Sergipe" code="28">
           <path stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round" d="M408.561,191.735
@@ -280,7 +287,7 @@
         c0.616-2.738,2.821-2.958,3.984-5.616c4.369-9.91,38.947-9.529,46.476-9.227c4.658,0.193,15.775,34.563,17.916,33.794
         c-1.728,2.19-5.754,8.929-8.41,8.984c-4.054,0.057-14.215,14.68-14.215,14.68s-37.329-12.05-40.287-11.285
         c-3.875-1.449-2.698-6.491-6.054-8.216C226.663,364.623,222.498,367.8,222.225,363.694z"></path>
-          <text transform="matrix(1 0 0 1 248.4453 356.1045)" fill="#FFFFFF">PR</text>
+          <text id="paranaText" transform="matrix(1 0 0 1 248.4453 356.1045)" fill="#FFFFFF">PR</text>
         </a>
         <a xlink:href="#santacatarina" class="estado" name="santa catarina" code="42">
           <path id="SC" stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round" d="M231.029,383.959
@@ -290,8 +297,8 @@
         C276.085,411.866,233.534,382.918,231.029,383.959z"></path>
           <text transform="matrix(1 0 0 1 266.9111 387.7646)" fill="#FFFFFF">SC</text>
         </a>
-        <a xlink:href="#riograndedosul" class="estado" name="Rio Grande do Sul" code="43">
-          <path stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round"
+        <a xlink:href="#riograndedosul" class="estado" name="rio grande do sul" code="43">
+          <path id="RS" stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round"
             d="M191.236,416.881
         c0.52-2.684,7.38-8.409,9.477-10.351c0.37-0.359,8.599-10.08,9.174-8.329c-1.301-3.89,2.781-1.589,3.917-4.819
         c0.26-0.521,7.04-4.821,7.109-4.795c1.436-0.191,6.721-3.695,7.421-3.257c1.204-2.028,8.927-1.479,8.653-0.824
@@ -314,8 +321,8 @@
         C247.982,330.386,239.876,331.21,239.3,330.554z"></path>
           <text transform="matrix(1 0 0 1 280.6816 327.3193)" fill="#FFFFFF">SP</text>
         </a>
-        <a xlink:href="#minasgerais" class="estado" name="Minas Gerais" code="31">
-          <path stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round" d="M262.881,297.305
+        <a xlink:href="#minasgerais" class="estado" name="minas gerais" code="31">
+          <path id="MG" stroke="#FFFFFF" stroke-width="1.0404" stroke-linecap="round" stroke-linejoin="round" d="M262.881,297.305
         c-1.696-5.094,15.531-19.882,18.844-13.421c5.531-7.367,15.886,1.588,19.773-3.944c0.988-1.367,3.015-1.453,3.725-2.957
         c0.326-0.711-0.493-2.793-0.056-3.888c1.369-3.398-4.873-2.355-0.109-6.603c4.547-4.053-1.917-4.739-1.204-8.186
         c0.957-4.604,1.807-4.713,5.613-6.027c1.943-0.688,0.906-8.272,0.083-8.52c-0.108-2.699,1.974-2.546,3.782-1.617
@@ -371,27 +378,47 @@
         c-2.626,1.767-6.571,1.917-9.558,2.109c-0.162,1.232-3.943,4.438-5.259,4.916c-3.122,1.149-2.657-2.727-5.095-3.602
         c0.713-1.124,4.082-5.203,3.725-6.205c-1.423-3.846-12.051,5.52-14.981,3.506c-1.396-0.973-6.218,1.493-3.476-2.588
         C405.574,150.776,400.398,142.889,401.575,141.096z"></path>
+        
+  <div style="position: absolute; top: 345;left:248; background-color: red;">s</div>
           <path class="circle" d="M433.797,133.597c6.237,0,11.26,5.051,11.26,11.261c0,6.226-5.022,11.262-11.26,11.262
         c-6.208,0-11.257-5.036-11.257-11.262C422.54,138.647,427.589,133.597,433.797,133.597z"></path>
           <text transform="matrix(1 0 0 1 425.2129 148.9893)" fill="#FFFFFF">PB</text>
         </a>
-      </g>
+
+
+ 
     </svg>
   </div>
   
+
+  <div id="pontos" class="jogadorPontos"></div>
+
   <div id="ordens">
     
   </div>
 
+  <div id="modal">
+   <h1>Estado Envia</h1>
+    <h2 id="estadoEnviaNome"></h2>
+    <h2 id="estadoEnviaValor"></h2>
+
+    <h1>Estado Recebe</h1>
+    <h2 id="estadoRecebeNome"></h2>
+    <h2 id="estadoRecebeValor"></h2>
+
+    <label for="valor">Valor</label>
+    <input type="number" name="valor">
+    <button onclick="adicionarJogadas($('#estadoEnviaNome').text(),
+    $('#estadoRecebeNome').text(),$('#valor').val())">Enviar</button>
+  </div>
+
   <button class="btn btn-success" style="float: right;" onclick="commitar();">COMMIT</button>
 
-  <form onsubmit="adicionarJogada(event, $('#envia').val(), $('#recebe').val(), $('#valor').val())">
-    <input type="number" id="envia">
-    <input type="number" id="recebe">
-    <input type="number" id="valor">
-    <button type="submit">enviar</button>
-  </form>
-  <script src="index.js"></script>
+  <script src="assets/js/index.js"></script>
+  <script type="text/javascript">
+    atualizaTela();
+
+  </script>
 </body>
 
 </html>

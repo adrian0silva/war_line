@@ -50,4 +50,8 @@ public class Jogada {
 	public void setEstadoRecebe(Estado estadoRecebe) {
 		this.estadoRecebe = estadoRecebe;
 	}
+	
+	public void setValor(int valor) {
+		this.valor = valor;
+	}
 }
