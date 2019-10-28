@@ -37,9 +37,15 @@ function atualizarEstados(estados) {
 	console.log(estados);
 
 	for(let a = 0;a < estados.length;a++) {
+
+		console.log(estados[a].nome);
+
 		estadoAncora = document.getElementsByName(""+estados[a].nome);
 	 	estado = estadoAncora[0].children[0];
 		estadoValor = estadoAncora[0].children[1];
+		
+		console.log("Não tem? "+estadoValor);
+		console.log(estados[a].valor);
 		estadoValor.innerHTML = estados[a].valor;
 		
 		if(estados[a].jogador == "adriano") {
@@ -135,11 +141,4 @@ function adicionarJogadas(estadoEnvia,estadoRecebe,valor){
 	})
 
 	atualizaTela();
-}
-
-var objetos = {
-	"pr":{
-		"top":356,
-		"left":248
-	}
 }

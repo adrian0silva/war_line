@@ -16,4 +16,5 @@ public interface EstadoRepository extends JpaRepository<Estado, Long>{
 	
 	@Query(value = "SELECT TOP 1 * FROM ESTADO WHERE JOGADOR_ID = 1 ORDER BY RAND()",nativeQuery = true)
 	Estado buscarEstadoDoJogadorAleatorio();
+
 }

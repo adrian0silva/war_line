@@ -1,5 +1,7 @@
 package br.com.unicesumar.war_line.util;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -24,19 +26,35 @@ public class PopulaBanco {
 	public void appReady(ApplicationReadyEvent event) {
 		
 		
-		Estado pr = new Estado("PR","parana", 2);
-		Estado sc = new Estado("SC","santa catarina", 2);
-		Estado sp = new Estado("SP","sao paulo", 2);
-		Estado rj = new Estado("RJ","rio de janeiro", 2);
-		Estado mg = new Estado("MG","minas gerais", 2);
-		Estado rs = new Estado("RS","rio grande do sul", 2);
+		Estado ac = new Estado("AC","Acre", 2);
+		Estado al = new Estado("AL","Alagoas", 2);
+		Estado ap = new Estado("AP","Amapa", 2);
+		Estado am = new Estado("AM","Amazonas", 2);
+		Estado ba = new Estado("BA","Bahia", 2);
+		Estado ce = new Estado("CE","Ceara", 2);
+		Estado df = new Estado("DF","Distrito Federal", 2);
+		Estado es = new Estado("ES","Espirito Santo", 2);
+		Estado go = new Estado("GO","Goias", 2);
+		Estado ma = new Estado("MA","Maranhao", 2);
+		Estado mt = new Estado("MT","Mato Grosso", 2);
+		Estado ms = new Estado("MS","Mato Grosso do Sul", 2);
+		Estado mg = new Estado("MG","Minas Gerais", 2);
+		Estado pa = new Estado("PA","Para", 2);
+		Estado pb = new Estado("PB","Paraiba", 2);
+		Estado pr = new Estado("PR","Parana", 2);
+		Estado pe = new Estado("PE","Pernambuco", 2);
+		Estado pi = new Estado("PI","Piaui", 2);
+		Estado rj = new Estado("RJ","Rio de Janeiro", 2);
+		Estado rn = new Estado("RN","Rio Grande do Norte", 2);
+		Estado rs = new Estado("RS","Rio Grande do Sul", 2);
+		Estado ro = new Estado("RO","Rondonia", 2);
+		Estado rr = new Estado("RR","Roraima", 2);
+		Estado sc = new Estado("SC","Santa Catarina", 2);
+		Estado sp = new Estado("SP","Sao Paulo", 2);
+		Estado se = new Estado("SE","Sergipe", 2);
+		Estado to = new Estado("TO","Tocantins", 2);
 		
-		estadoRepository.save(pr);
-		estadoRepository.save(sc);
-		estadoRepository.save(sp);
-		estadoRepository.save(rj);
-		estadoRepository.save(mg);
-		estadoRepository.save(rs);
+		estadoRepository.saveAll(Arrays.asList(ac,al,ap,am,ba,ce,df,es,go,ma,mt,ms,mg,pa,pb,pr,pe,pi,rj,rn,rs,ro,rr,sc,sp,se,to));
 		
 		Jogador adriano = new Jogador("adriano");
 		Jogador computador = new Jogador("computador");
