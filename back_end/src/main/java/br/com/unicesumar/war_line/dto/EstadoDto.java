@@ -12,9 +12,7 @@ public class EstadoDto {
 	private String nome;
 	private Integer valor;
 	
-	private String jogador;
-
-	
+	private String jogador;	
 	
 	public EstadoDto(Estado estado) {
 		this.id = estado.getId().toString();
@@ -50,6 +48,5 @@ public class EstadoDto {
 	public static List<EstadoDto> converter(List<Estado> estado) {
 		return estado.stream().map(EstadoDto::new).collect(Collectors.toList());
 	}
-	
 	
 }

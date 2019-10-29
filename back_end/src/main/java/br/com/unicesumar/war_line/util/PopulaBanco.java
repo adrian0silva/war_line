@@ -23,8 +23,7 @@ public class PopulaBanco {
 	
 	
 	@EventListener
-	public void appReady(ApplicationReadyEvent event) {
-		
+	public void appReady(ApplicationReadyEvent event) {		
 		
 		Estado ac = new Estado("AC","Acre", 2);
 		Estado al = new Estado("AL","Alagoas", 2);
@@ -56,25 +55,23 @@ public class PopulaBanco {
 		
 		estadoRepository.saveAll(Arrays.asList(ac,al,ap,am,ba,ce,df,es,go,ma,mt,ms,mg,pa,pb,pr,pe,pi,rj,rn,rs,ro,rr,sc,sp,se,to));
 		
-		Jogador adriano = new Jogador("adriano");
+		Jogador player = new Jogador("player");
 		Jogador computador = new Jogador("computador");
 		
-		jogadorRepository.save(adriano);
+		jogadorRepository.save(player);
 		jogadorRepository.save(computador);
 		
-		adriano.adicionarEstado(pr);
+		player.adicionarEstado(pr);
 		estadoRepository.save(pr);
-		jogadorRepository.save(adriano);
+		jogadorRepository.save(player);
 		
-		adriano.adicionarEstado(sc);
+		player.adicionarEstado(sc);
 		estadoRepository.save(sc);
-		jogadorRepository.save(adriano);
+		jogadorRepository.save(player);
 		
 		computador.adicionarEstado(rj);
 		estadoRepository.save(rj);
-		jogadorRepository.save(computador);
-		
+		jogadorRepository.save(computador);		
 	}
-
 
 }

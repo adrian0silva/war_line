@@ -1,6 +1,5 @@
 package br.com.unicesumar.war_line.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class EstadoController {
 		return EstadoDto.converter(estados);
 	}
 	
-	@GetMapping("busca-pelo-nome/{id}")
+	@GetMapping("busca-pelo-id/{id}")
 	public EstadoDto getOne(@PathVariable("id") Long id) {
 		return new EstadoDto(estadoRepository.findById(id).get());
 	}

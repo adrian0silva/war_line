@@ -12,8 +12,10 @@ public class Jogada {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@OneToOne
 	private Estado estadoEnvia;
+	
 	@OneToOne
 	private Estado estadoRecebe;
 	private int valor;

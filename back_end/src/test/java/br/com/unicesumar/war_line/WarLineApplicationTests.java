@@ -12,5 +12,4 @@ public class WarLineApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
