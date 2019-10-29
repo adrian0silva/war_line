@@ -84,8 +84,7 @@ public class JogadorController {
 			estadoRepository.save(estado);
 		}
 		
-		System.out.println(estado.getNome());
-		
+		System.out.println(estado.getNome());		
 	}
 	
 	@PostMapping("/{id}/jogadas")

@@ -20,8 +20,7 @@ public class PopulaBanco {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
-	
-	
+		
 	@EventListener
 	public void appReady(ApplicationReadyEvent event) {		
 		
