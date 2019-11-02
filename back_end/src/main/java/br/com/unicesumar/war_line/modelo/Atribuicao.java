@@ -5,13 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Entity
 public class Atribuicao {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,7 +30,6 @@ public class Atribuicao {
 		this.estado = estado;
 		this.pontos = pontos;
 	}
-
 	
 	public void setEstado(Estado estado) {
 		this.estado = estado;
@@ -48,13 +45,17 @@ public class Atribuicao {
 	public Long getId() {
 		return id;
 	}
+	
 	public Estado getEstado() {
 		return estado;
 	}
+	
 	public Jogador getJogador() {
 		return jogador;
 	}
+	
 	public Integer getPontos() {
 		return pontos;
 	}
+	
 }

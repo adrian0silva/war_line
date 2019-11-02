@@ -36,9 +36,15 @@ function atualizarEstados(estados) {
 	console.log(estados);
 
 	for(let a = 0;a < estados.length;a++) {
+
+		console.log(estados[a].nome);
+
 		estadoAncora = document.getElementsByName(""+estados[a].nome);
 	 	estado = estadoAncora[0].children[0];
 		estadoValor = estadoAncora[0].children[1];
+		
+		console.log("Não tem? "+estadoValor);
+		console.log(estados[a].valor);
 		estadoValor.innerHTML = estados[a].valor;
 		
 		if(estados[a].jogador == "adriano") {
@@ -87,7 +93,10 @@ $('a').click(function (evento) {
 		adicionarPontos(evento.currentTarget.children[0].id);
 		return;
 	}
+	
+	limpaAgrupamentoSetasAcionados();
 	acionaSetas(evento.currentTarget.children[0].id);
+
 
 	$.get(URL+"/estado/busca-pelo-uf/"+evento.currentTarget.children[0].id,function(estado){
 		$("#estadoEnviaNome")[0].innerHTML = estado.nome;
@@ -131,6 +140,7 @@ function adicionarPontos(estado) {
 var agrup;
 
 function limpaSetasDoEstado(agrupamento,setaEncontrada) {
+	console.log(agrupamento);
 	agrupamento.style.display = "inline";
 
 	for(var a = 0;a < agrupamento.children.length;a++) {
@@ -138,12 +148,16 @@ function limpaSetasDoEstado(agrupamento,setaEncontrada) {
 	}
 	setaEncontrada.style.display = "inline";	
 }
+
+var set;
 function adicionarJogadas(estadoEnvia,estadoRecebe,valor) {
 	
 	console.log("Estado envia: " + estadoEnvia);
 	setaEncontrada = $(`div:contains(${estadoEnvia[0].id} to ${estadoRecebe[0].id})`);
+	set = setaEncontrada;
+	console.log("SETA ENCONTRADA: " + setaEncontrada);
 	limpaSetasDoEstado(setaEncontrada[0],setaEncontrada[1]);
-
+/*
 	let jogada = {
 		estadoEnvia: {
 			id: 3
@@ -160,7 +174,7 @@ $.ajax({
 		contentType: "application/json",
 		dataType: 'json'
 	})
-
+*/
 	atualizaTela();
 }
 
@@ -201,7 +215,7 @@ function criarJogadas(estadoEnvia,estadoRecebe){
 	})
 
 	atualizaTela();*/
-}
+} 
 
 var objetos = {
 		 "AC":[
@@ -318,9 +332,9 @@ function criarSetas(estados) {
 			seta.style.width = "50px";
 			seta.style.height = "10px";
 			seta.style.color = "white";
-			seta.innerHTML = `${estado} to ${adjacencia}`;
 			*/
-
+			seta.innerHTML = `${estado} to ${adjacencia}`;
+			
 			seta.onclick = function()  {
 				console.log(this.id + " to " + this.name);
 				criarJogadas(this.id,this.name);

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.unicesumar.war_line.modelo.Atribuicao;
-import br.com.unicesumar.war_line.modelo.Jogador;
 
 public class AtribuicaoDto {
 	

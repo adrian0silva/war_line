@@ -1,15 +1,15 @@
 .jogadorPontos {
-	padding-top: 50px;
-	border-color: 2px solid green;
+  padding-top: 50px;
+  border-color: 2px solid green;
 }
 
 
 #modal {
-	display: inline-block;
-	height: 50%;
-	width: 50%;
-	background-color: green;
-	color: black;
+  display: inline-block;
+  height: 50%;
+  width: 50%;
+  background-color: green;
+  color: black;
 }
 
 

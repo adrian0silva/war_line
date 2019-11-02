@@ -1,7 +1,6 @@
 package br.com.unicesumar.war_line.controller;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.unicesumar.war_line.dto.JogadaDto;
@@ -62,23 +60,22 @@ public class JogadorController {
 		
 		if(jogador.getPontos() == 0) {
 			throw new RuntimeException("Jogador nao possui pontos para atribuir!");
-		}
-		
+		}		
 		
 		jogador.setPontos(jogador.getPontos() - 1);
 		
 		List<Atribuicao> listaAtribuicao = atribuicaoRepository.buscarAtribuicao(estado.getId());
 		
 		System.out.println(listaAtribuicao.size());
-		
-		
+				
 		if(listaAtribuicao.size() == 0) {
 			Atribuicao atribuicao = jogador.adicionarPontos(estado, 1);
 			estado.setValor(estado.getValor() + 1);
 			atribuicaoRepository.save(atribuicao);
 			jogadorRepository.save(jogador);
 			estadoRepository.save(estado);
-		} else {
+		} 
+		else {
 			Atribuicao atribuicao = atribuicaoRepository.buscar(estado.getId());
 			atribuicao.setPontos(atribuicao.getPontos() + 1);
 			estado.setValor(estado.getValor() + 1);
@@ -87,8 +84,7 @@ public class JogadorController {
 			estadoRepository.save(estado);
 		}
 		
-		System.out.println(estado.getNome());
-		
+		System.out.println(estado.getNome());		
 	}
 	
 	@PostMapping("/{id}/jogadas")
@@ -115,9 +111,7 @@ public class JogadorController {
 		
 		if(jogada.getValor() <= 0  || jogada.getValor() > estadoEnvia.getValor()) {
 			throw new RuntimeException("Valor não pode ser 0,negativo ou maior que os pontos do estado que envia");
-		}
-		
-	
+		}	
 		
 		List<Jogada> jogadasIguais = jogadaRepository.buscarCombinacao(estadoEnvia.getId(), estadoRecebe.getId());
 		
@@ -183,8 +177,7 @@ public class JogadorController {
 		
 		computador.adicionarJogada(jogadaDoComputador);
 		
-		jogadorRepository.save(computador);
-		
+		jogadorRepository.save(computador);		
 		
 		// simular partida
 		// pegar jogadas do jogador e computador e juntar em uma
@@ -201,7 +194,6 @@ public class JogadorController {
 			todasJogadas.get(i).getEstadoEnvia().setValor(todasJogadas.get(i).getEstadoEnvia().getValor() - todasJogadas.get(i).getValor());
 			estadoRepository.save(todasJogadas.get(i).getEstadoEnvia());
 			estadoRepository.save(todasJogadas.get(i).getEstadoRecebe());
-		}
-		
+		}		
 	}
 }

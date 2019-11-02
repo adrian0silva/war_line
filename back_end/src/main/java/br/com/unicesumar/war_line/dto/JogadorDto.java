@@ -3,7 +3,6 @@ package br.com.unicesumar.war_line.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.unicesumar.war_line.modelo.Estado;
 import br.com.unicesumar.war_line.modelo.Jogador;
 
 public class JogadorDto {
