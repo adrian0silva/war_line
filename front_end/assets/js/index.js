@@ -3,7 +3,6 @@ const URL = 'http://localhost:9090/api';
 
 function atualizaTela() {
 
-	$("#modal").hide();
 
 	$.get(URL+'/jogador').done(function(jogadores){
 		atualizarJogadores(jogadores);	
@@ -81,14 +80,14 @@ function atualizarJogadas(jogadas) {
         }	
 }
 
-
+var grupo;
 $('a').click(function (evento) {
 	let pontosDoJogador = parseInt($("#pontos")[0].innerHTML);
 	if(pontosDoJogador > 0) {
 		adicionarPontos(evento.currentTarget.children[0].id);
 		return;
 	}
-
+	acionaSetas(evento.currentTarget.children[0].id);
 
 	$.get(URL+"/estado/busca-pelo-uf/"+evento.currentTarget.children[0].id,function(estado){
 		$("#estadoEnviaNome")[0].innerHTML = estado.nome;
@@ -99,9 +98,25 @@ $('a').click(function (evento) {
 		$("#estadoRecebeValor")[0].innerHTML = "12";
 
 
-		$("#modal").show();
 	});
 });
+
+function acionaSetas(sigla) {
+
+	$("#agrupadorSetas_"+sigla)[0].style.display = "inline";
+	for(var a = 0;a < $("#agrupadorSetas_"+sigla)[0].children.length;a++) {
+		$("#agrupadorSetas_"+sigla)[0].children[a].style.display = "inline";
+	}
+}
+
+
+function limpaAgrupamentoSetasAcionados() {
+	for(estado in objetos) {
+		
+		$("#agrupadorSetas_"+estado)[0].style.display = "none";
+	}
+}
+
 
 function adicionarPontos(estado) {
 	console.log(estado);
@@ -113,9 +128,22 @@ function adicionarPontos(estado) {
 	atualizaTela();
 }
 
+var agrup;
 
-function adicionarJogadas(estadoEnvia,estadoRecebe,valor){
+function limpaSetasDoEstado(agrupamento,setaEncontrada) {
+	agrupamento.style.display = "inline";
+
+	for(var a = 0;a < agrupamento.children.length;a++) {
+		agrupamento.children[a].style.display = "none";
+	}
+	setaEncontrada.style.display = "inline";	
+}
+function adicionarJogadas(estadoEnvia,estadoRecebe,valor) {
 	
+	console.log("Estado envia: " + estadoEnvia);
+	setaEncontrada = $(`div:contains(${estadoEnvia[0].id} to ${estadoRecebe[0].id})`);
+	limpaSetasDoEstado(setaEncontrada[0],setaEncontrada[1]);
+
 	let jogada = {
 		estadoEnvia: {
 			id: 3
@@ -125,10 +153,9 @@ function adicionarJogadas(estadoEnvia,estadoRecebe,valor){
 		},
 		valor: parseInt(valor)
 	}
-
-	$.ajax({
+$.ajax({
 		type:"POST",
-		url: URL+"/jogador/1/jogadas",
+		url:"/jogador/1/jogadas",
 		data: JSON.stringify(jogada),
 		contentType: "application/json",
 		dataType: 'json'
@@ -137,9 +164,173 @@ function adicionarJogadas(estadoEnvia,estadoRecebe,valor){
 	atualizaTela();
 }
 
+
+function criarJogadas(estadoEnvia,estadoRecebe){
+	console.log("Estado envia: " + estadoEnvia);
+	$("#modal").append(
+	`<h1>Estado Envia</h1>
+    <h2>${estadoEnvia}</h2>
+    <h2>${10}</h2>
+
+    <h1>Estado Recebe</h1>
+    <h2>${estadoRecebe}</h2>
+    <h2>${60}</h2>
+
+    <label for="valor">Valor</label>
+    <input type="number" name="valor">
+    <button onclick="adicionarJogadas(${estadoEnvia},${estadoRecebe},$('#valor').val())">Enviar</button>
+  `)
+
+	/*
+	let jogada = {
+		estadoEnvia: {
+			id: 3
+		},
+		estadoRecebe: {
+			id: 2
+		},
+		valor: parseInt(valor)
+	}*/
+/*
+	$.ajax({
+		type:"POST",
+		url:"/jogador/1/jogadas",
+		data: JSON.stringify(jogada),
+		contentType: "application/json",
+		dataType: 'json'
+	})
+
+	atualizaTela();*/
+}
+
 var objetos = {
-	"pr":{
-		"top":356,
-		"left":248
+		 "AC":[
+			"AM","RO"
+		],	
+		 "AL":[
+			"PE","SE","BA"
+		],
+		 "AP":[
+			"PA"
+		],	
+		 "AM":[
+			"PA","MT","RO","RR","AC"
+		],	
+		 "BA":[
+			"MG","ES","GO","TO","PI","PE","AL","SE"
+		],	
+		 "CE":[
+			"RN","PB","PE","PI"
+		],	
+		 "DF":[
+			"GO","MG"
+		],	
+		 "ES":[
+			"BA","MG","RJ"
+		],	
+		 "GO":[
+			"MS","MT","TO","BA","MG","DF"
+		],	
+		 "MA":[
+			"PI","TO","PA"
+		],
+		 "MT":[
+			"AM","PA","TO","GO","MS","RO"
+		],	
+		 "MS":[
+			"MT","GO","MG","SP","PR"
+		],	
+		 "MG":[
+			"SP","RJ","ES","GO","BA","DF","MS"
+		],	
+		 "PA":[
+			"AP","RR","AM","MS","TO","MA"
+		],	
+		 "PB":[
+			"RN","PE","CE"
+		],	
+		 "PR":[
+			"MS","SC","SP"
+		],	
+		 "PE":[
+			"PB","CE","AL","BA","PI"
+		],
+		 "PI":[
+			"PE","CE","TO","BA","MA"
+		],	
+		 "RJ":[
+			"MG","ES","SP"	
+		],	
+		 "RN":[
+			"PB","CE"			
+		],	
+		 "RS":[
+			"SC"			
+		],	
+		 "RO":[
+			"MT","AM","AC"
+		],	
+		 "RR":[
+			"PA","AM"
+		],	
+		 "SC":[
+			"PR","RS"
+		],	
+		 "SP":[
+			"MG","PR","RJ","MS"
+		],	
+		 "SE":[		
+			"BA","AL"
+		],		
+		 "TO":[
+			"GO","MT","PA","MA","PI","BA"
+		]	
+}
+
+var csseta;
+function criarSetas(estados) {
+	var indice = 0;
+	for(estado in estados) {
+		var agrupadorSetas = document.createElement("div");
+		agrupadorSetas.style.display = "none";
+		agrupadorSetas.id = "agrupadorSetas_"+estado;
+		var rotacao = 0;
+		for(adjacencia of estados[estado]) {
+			var seta = document.createElement("div");
+			seta.id = `${estado}`;
+			seta.name = `${adjacencia}`;
+			seta.className = "setinha";
+			var altura = $(".setinha").css("height");
+
+			var largura = $(".setinha").css("width");
+
+			seta.style.position = "absolute"
+
+			console.log("Altura type: " + typeof altura);
+			console.log("Largura type: " + 	typeof largura);
+			
+			seta.style.top = `calc(${$("text")[indice].transform.animVal[0].matrix.f}px - ${(typeof altura == "string") ? altura : "1px"})`;
+			seta.style.left = `calc(${$("text")[indice].transform.animVal[0].matrix.e}px - ${(typeof largura == "string") ? largura : "1px"})`;
+			
+			seta.style.transform = `rotate(${rotacao}deg)`;
+			
+			/*seta.style.background = "yellow";
+			seta.style.width = "50px";
+			seta.style.height = "10px";
+			seta.style.color = "white";
+			seta.innerHTML = `${estado} to ${adjacencia}`;
+			*/
+
+			seta.onclick = function()  {
+				console.log(this.id + " to " + this.name);
+				criarJogadas(this.id,this.name);
+			}
+			agrupadorSetas.appendChild(seta);
+			rotacao = rotacao + 60;
+		}
+		indice++;
+		document.body.appendChild(agrupadorSetas);
 	}
 }
+
+criarSetas(objetos);

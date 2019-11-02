@@ -5,9 +5,48 @@
 
 
 #modal {
+	display: inline-block;
 	height: 50%;
 	width: 50%;
-	background-color: teal;
+	background-color: green;
 	color: black;
 }
+
+
+.setinha {
+  position: relative;
+  width: 75px;
+  height: 75px;
+}
+
+.setinha::before {
+  position: absolute;
+  content: '';
+  width: calc( 100% - 25px );
+  height: 25px;
+  background: red;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+
+
+.setinha::after {
+  position: absolute;
+  content: '';
+  float: left;
+  width: 1px;
+  height: 1px;
+  border: 25px solid transparent;
+  border-left-color: red;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  left: calc( 100% - 25px );
+}
+
+
+
 
