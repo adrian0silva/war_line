@@ -1,5 +1,5 @@
 
-const URL = 'http://localhost:9090/api';
+const URL = 'http://127.0.0.1/api';
 
 function atualizaTela() {
 
@@ -48,7 +48,7 @@ function atualizarEstados(estados) {
 		console.log(estados[a].valor);
 		estadoValor.innerHTML = estados[a].valor;
 		
-		if(estados[a].jogador == "adriano") {
+		if(estados[a].jogador == "player") {
 			estado.style.fill = "blue";
 		} else if(estados[a].jogador == "computador") {
 			estado.style.fill = "red";
@@ -63,14 +63,14 @@ function atualizarAtribuicoes(atribuicoes) {
 	console.log(atribuicoes);
 	ordemAtribuicoes = $("#ordens");
 	ordemData = atribuicoes;
-	 $('#ordens')[0].innerHTML = "";
+	$('#ordens')[0].innerHTML = "";
         for(var a = 0;a < atribuicoes.length;a++){
-            $("#ordens").append(`<h1> 
-            <div class='btn btn-success btn-little '><span class='glyphicon glyphicon-plus'></span> </div>
-            <div class='btn btn-danger btn-little'><span class='glyphicon glyphicon-trash'></span> </div>
-            Deploy `+atribuicoes[a].pontos+
-            ` to `+ atribuicoes[a].nomeEstado +`  </h1>`);
-        }
+			if(document.getElementById(atribuicoes[a].nomeEstado)){
+			$("#jog").html("<a class='list-group-item list-group-item-success' id='"+atribuicoes[a].nomeEstado+"'><h4><div class='btn btn-success btn-little'><span class='glyphicon glyphicon-plus'></span> </div><div class='btn btn-danger btn-little'><span class='glyphicon glyphicon-trash'></span></div>Deploy "+atribuicoes[a].pontos+" "+atribuicoes[a].nomeEstado +"</h4></a>");		
+			}else{
+			$("#jog").append("<a class='list-group-item list-group-item-success' id='"+atribuicoes[a].nomeEstado+"'><h4><div class='btn btn-success btn-little'><span class='glyphicon glyphicon-plus'></span> </div><div class='btn btn-danger btn-little'><span class='glyphicon glyphicon-trash'></span></div>Deploy "+atribuicoes[a].pontos+" "+atribuicoes[a].nomeEstado +"</h4></a>");
+			}
+	   }
 }
 
 function atualizarJogadas(jogadas) {
@@ -79,12 +79,12 @@ function atualizarJogadas(jogadas) {
 	ordemData = jogadas;
 	 $('#ordens')[0].innerHTML = "";
      for(var a = 0;a < jogadas.length;a++){
-            $("#ordens").append(`<h1> 
-            <div class='btn btn-success btn-little '><span class='glyphicon glyphicon-plus'></span> </div>
-            <div class='btn btn-danger btn-little'><span class='glyphicon glyphicon-trash'></span> </div>
-            `+jogadas[a].estadoEnviaNome+` attack/transfer` + jogadas[a].valor+ 
-            ` to `+ jogadas[a].estadoRecebeNome +`  </h1>`);
-        }	
+		 if(document.getElementById(atribuicoes[a].nomeEstado)){
+			$("#jog").html("<a class='list-group-item list-group-item-primary'><h4><div class='btn btn-success btn-little'>"+"<h4><div class='btn btn-success btn-little '><span class='glyphicon glyphicon-plus'></span> </div><div class='btn btn-danger btn-little'><span class='glyphicon glyphicon-trash'></span> </div>"+jogadas[a].estadoEnviaNome+" attack/transfer" + jogadas[a].valor+ " to "+ jogadas[a].estadoRecebeNome +"  </h4></a>");
+			}else{
+			$("#jog").append("<a class='list-group-item list-group-item-primary'><h4><div class='btn btn-success btn-little'>"+"<h4><div class='btn btn-success btn-little '><span class='glyphicon glyphicon-plus'></span> </div><div class='btn btn-danger btn-little'><span class='glyphicon glyphicon-trash'></span> </div>"+jogadas[a].estadoEnviaNome+" attack/transfer" + jogadas[a].valor+ " to "+ jogadas[a].estadoRecebeNome +"  </h4></a>");
+			}
+          }	
 }
 
 
@@ -95,7 +95,7 @@ $('a').click(function (evento) {
 		return;
 	}
 
-
+/* 
 	$.get(URL+"/estado/busca-pelo-uf/"+evento.currentTarget.children[0].id,function(estado){
 		$("#estadoEnviaNome")[0].innerHTML = estado.nome;
 		$("#estadoEnviaValor")[0].innerHTML = estado.valor;
@@ -107,6 +107,7 @@ $('a').click(function (evento) {
 
 		$("#modal").show();
 	});
+	*/
 });
 
 function adicionarPontos(estado) {

@@ -1,8 +1,10 @@
+body{
+	background: linear-gradient(180deg, #00b4db, #0083b0);
+}
 .jogadorPontos {
 	padding-top: 50px;
 	border-color: 2px solid green;
 }
-
 
 #modal {
 	height: 50%;
@@ -11,3 +13,8 @@
 	color: black;
 }
 
+#svg-map{
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
