@@ -1,0 +1,83 @@
+.jogadorPontos {
+  padding-top: 50px;
+  border-color: 2px solid green;
+}
+
+
+#modal {
+  display: inline-block;
+  height: 50%;
+  width: 50%;
+  background-color: green;
+  color: black;
+}
+
+
+.setinha {
+  position: relative;
+  width: 75px;
+  height: 75px;
+}
+
+.setinha::before {
+  position: absolute;
+  content: '';
+  width: calc( 100% - 25px );
+  height: 25px;
+  background: red;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+
+
+.setinha::after {
+  position: absolute;
+  content: '';
+  float: left;
+  width: 1px;
+  height: 1px;
+  border: 25px solid transparent;
+  border-left-color: red;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  left: calc( 100% - 25px );
+}
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
