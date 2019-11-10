@@ -1,5 +1,7 @@
 package br.com.unicesumar.war_line.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,6 +13,7 @@ public interface EstadoRepository extends JpaRepository<Estado, Long>{
 
 	Estado findByUf(String uf);
 
+	
 	@Query(value = "SELECT TOP 1 * FROM ESTADO WHERE JOGADOR_ID = 2 ORDER BY RAND()",nativeQuery = true)
 	Estado buscarEstadoDoComputadorAleatorio();
 	

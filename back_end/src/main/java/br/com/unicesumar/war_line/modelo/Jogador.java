@@ -58,6 +58,10 @@ public class Jogador {
 		return estados;
 	}
 
+	public List<Jogada> getJogadas() {
+		return jogadas;
+	}
+	
 	public Atribuicao adicionarPontos(Estado estado, Integer pontos) {
 		Atribuicao atribuicao = new Atribuicao(this, estado, pontos);
 		this.atribuicoes.add(atribuicao);

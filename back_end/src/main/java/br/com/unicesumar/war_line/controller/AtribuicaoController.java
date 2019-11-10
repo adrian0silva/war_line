@@ -13,22 +13,21 @@ import br.com.unicesumar.war_line.dto.AtribuicaoDto;
 import br.com.unicesumar.war_line.modelo.Atribuicao;
 import br.com.unicesumar.war_line.repository.AtribuicaoRepository;
 
-@RequestMapping("/api/atribuicao")
+@RequestMapping("/api/atribuicoes")
 @RestController
+@CrossOrigin("*")
 public class AtribuicaoController {
 
 	@Autowired
 	AtribuicaoRepository atribuicaoRepository;
 	
 	@GetMapping
-	@CrossOrigin
 	public List<AtribuicaoDto> listar() {
 		 List<Atribuicao> atribuicoes = atribuicaoRepository.findAll();
 		 return AtribuicaoDto.converter(atribuicoes);
 	}
 	
 	@GetMapping("/{id}")
-	@CrossOrigin
 	public AtribuicaoDto buscarPeloId(@PathVariable("id") Long id) {
 		return new AtribuicaoDto(atribuicaoRepository.findById(id).get());
 	}

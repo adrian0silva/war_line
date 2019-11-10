@@ -7,6 +7,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import br.com.unicesumar.war_line.controller.JogadaController;
+import br.com.unicesumar.war_line.controller.JogadorController;
 import br.com.unicesumar.war_line.modelo.Estado;
 import br.com.unicesumar.war_line.modelo.Jogador;
 import br.com.unicesumar.war_line.repository.EstadoRepository;
@@ -71,6 +73,16 @@ public class PopulaBanco {
 		computador.adicionarEstado(rj);
 		estadoRepository.save(rj);
 		jogadorRepository.save(computador);		
+		
+		
+		
+		for(int linha = 1;linha < 28;linha++) {
+			for(int coluna = 1;coluna < 28;coluna++) {
+				boolean temAdjacencia = new JogadorController().matrizDeAdjacencia(Long.valueOf(linha), Long.valueOf(coluna));
+				
+				System.out.println(estadoRepository.findById(Long.valueOf(linha)).get().getNome() + " tem adjacencia com " + estadoRepository.findById(Long.valueOf(coluna)).get().getNome() + " ? " +  temAdjacencia);	
+			}
+		}
 	}
 
 }

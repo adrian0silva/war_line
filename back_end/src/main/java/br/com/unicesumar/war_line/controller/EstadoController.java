@@ -1,6 +1,8 @@
 package br.com.unicesumar.war_line.controller;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,5 +37,19 @@ public class EstadoController {
 	@GetMapping("busca-pelo-uf/{uf}")
 	public EstadoDto buscaPeloUf(@PathVariable("uf") String uf) {
 		return new EstadoDto(estadoRepository.findByUf(uf));
+	}
+	
+	@GetMapping("valida-estado-jogador-uf/{uf}")
+	public Boolean validaEstadoJogadorPeloUf(@PathVariable("uf") String uf) {
+		Estado estadoEncontrado = estadoRepository.findByUf(uf);
+		
+		if(Objects.isNull(estadoEncontrado.getJogador())) {
+			return false;			
+		}
+		if(estadoEncontrado.getJogador().getNome() == "computador") {
+			return false;
+		}
+		
+		return true;
 	}
 }

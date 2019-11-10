@@ -9,12 +9,16 @@ public class JogadaDto {
 	
 	private String estadoEnviaNome;
 	private String estadoRecebeNome;
+	private String estadoEnviaNomeSigla;
+	private String estadoRecebeNomeSigla;
 	private Integer valor;
 	
 	public JogadaDto(Jogada jogada) {
 		estadoEnviaNome = jogada.getEstadoEnvia().getNome();
 		estadoRecebeNome = jogada.getEstadoRecebe().getNome();
 		valor = jogada.getValor();
+		estadoEnviaNomeSigla = jogada.getEstadoEnvia().getUf();
+		estadoRecebeNomeSigla = jogada.getEstadoRecebe().getUf();
 	}
 	
 	public String getEstadoEnviaNome() {
@@ -25,6 +29,12 @@ public class JogadaDto {
 	}
 	public Integer getValor() {
 		return valor;
+	}
+	public String getEstadoEnviaNomeSigla() {
+		return estadoEnviaNomeSigla;
+	}
+	public String getEstadoRecebeNomeSigla() {
+		return estadoRecebeNomeSigla;
 	}
 	public static List<JogadaDto> converter(List<Jogada> jogadas) {
 		return jogadas.stream().map(JogadaDto::new).collect(Collectors.toList());
