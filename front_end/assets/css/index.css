@@ -2,6 +2,55 @@ body{
 	background: linear-gradient(180deg, #00b4db, #0083b0);
 }
 
+.sul-valor {
+  background: green;
+  height: 50px;
+  width: 50px;
+  border: 3px solid pink;
+  border-radius: 20px;
+  position: absolute;
+  left: 45%;
+  top: 75%;
+}
+
+.sul-valor a {
+  position: relative;
+  color: #f1f1f1;
+  left: 33%;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.sul {
+  stroke: green;
+  stroke-width: 2;
+}
+
+.sudeste-valor {
+  background: orange;
+  height: 50px;
+  width: 50px;
+  border: 3px solid pink;
+  border-radius: 20px;
+  position: absolute;
+  left: 75%;
+  top: 65%;
+}
+
+.sudeste-valor a {
+  position: relative;
+  color: #f1f1f1;
+  left: 33%;
+  font-size: 30px;
+  text-decoration: none;
+}
+
+.sudeste {
+  stroke: orange;
+  stroke-width: 2;
+}
+
+
 #svg-map{
 	  margin-left: auto;
     margin-right: auto;

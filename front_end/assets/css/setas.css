@@ -250,3 +250,13 @@
     from {left: 550px;}
     to {left: 500px;}
 }
+
+@keyframes moverSetaPRtoSP {
+    from {left: 436px;}
+    to {left: 446px;}
+}
+
+@keyframes moverSetaPRtoSC{
+    from {top: 0%;}
+    to {top: 10%;}
+}

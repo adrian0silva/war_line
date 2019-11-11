@@ -4,6 +4,7 @@ let aberto = false;
 obtemDadosDosEstados();
 obtemPontosDoJogador();
 obtemAtribuicoes();
+atualizaRound();
 
 function atualizaCorDosEstados(estados) {
 
@@ -238,6 +239,7 @@ function criarSetas(estados) {
             }
 
             agrupadorSetas.appendChild(seta);
+            
         }
         document.body.appendChild(agrupadorSetas);
     }
@@ -283,7 +285,7 @@ function abreModal(estadoEnvia, estadoRecebe) {
 
         <h1>Estado Recebe</h1>
         <h2>${estadoRecebe.nome}</h2>
-        <h2>${estadoEnvia.valor}</h2>
+        <h2>${estadoRecebe.valor}</h2>
 
         <label for="valor">Valor</label>
         <input id="valor" type="number" name="valor" min="1" max="${estadoEnvia.valor}" required="true" />
@@ -320,6 +322,13 @@ function adicionarJogadas(estadoEnviaId, estadoRecebeId, valor) {
 
 
 function commitar() {
+    var pontosDoJogador = $("#pontos")[0].innerHTML;
+
+    if(pontosDoJogador > 0) {
+        alert("Voce deve distribuir seus pontos!");
+        return;
+    }
+
     $.ajax({
         type: "POST",
         url: URL + "/jogador",
@@ -332,11 +341,21 @@ function commitar() {
 function animaSeta(jogada) {
     
     congelaTempo(jogada,0);
+    limparAnimacoes(jogada);
 
+    obtemDadosDosEstados();
+    obtemPontosDoJogador();
+    atualizaRound();
     //var setaParaAnimar = $(`.setinhaRJtoSP`);
-
-
 }
+
+function limparAnimacoes(jogada) {
+    for(var a = 0;a < jogada.length;a++ ) {
+        var setaParaAnimar = $(`.setinha${jogada[a].estadoEnviaNomeSigla}to${jogada[a].estadoRecebeNomeSigla}`);
+        setaParaAnimar[0].style.animation = "";
+    }
+}
+
 function congelaTempo(jogada,jogadaIndice) {
     console.log(jogada);
     console.log(jogadaIndice);
@@ -348,9 +367,52 @@ function congelaTempo(jogada,jogadaIndice) {
     var setaParaAnimar = $(`.setinha${jogada[jogadaIndice].estadoEnviaNomeSigla}to${jogada[jogadaIndice].estadoRecebeNomeSigla}`);
 
     setTimeout((algo) => {
-        setaParaAnimar[0].style.animation = "moverSeta 3s";
+        setaParaAnimar[0].style.animation = "moverSeta"+jogada[jogadaIndice].estadoEnviaNomeSigla+"to"+jogada[jogadaIndice].estadoRecebeNomeSigla+" 3s";
         console.log(algo);
         jogadaIndice = jogadaIndice + 1;
         congelaTempo(jogada,jogadaIndice);
     }, 2000);
+}
+
+$(".sul-valor").hover(function() {
+    $(".sul")[0].style.stroke = "green";
+    $(".sul")[0].style.strokeWidth = "4";
+    $(".sul")[1].style.stroke = "green";
+    $(".sul")[1].style.strokeWidth = "4";
+    $(".sul")[2].style.stroke = "green";
+    $(".sul")[2].style.strokeWidth = "4";
+},function() {
+    $(".sul")[0].style.stroke = "green";
+    $(".sul")[0].style.strokeWidth = "2";
+    $(".sul")[1].style.stroke = "green";
+    $(".sul")[1].style.strokeWidth = "2";
+    $(".sul")[2].style.stroke = "green";
+    $(".sul")[2].style.strokeWidth = "2";
+})
+
+
+$(".sudeste-valor").hover(function() {
+    $(".sudeste")[0].style.stroke = "orange";
+    $(".sudeste")[0].style.strokeWidth = "4";
+    $(".sudeste")[1].style.stroke = "orange";
+    $(".sudeste")[1].style.strokeWidth = "4";
+    $(".sudeste")[2].style.stroke = "orange";
+    $(".sudeste")[2].style.strokeWidth = "4";
+    $(".sudeste")[3].style.stroke = "orange";
+    $(".sudeste")[3].style.strokeWidth = "4";
+},function() {
+    $(".sudeste")[0].style.stroke = "orange";
+    $(".sudeste")[0].style.strokeWidth = "2";
+    $(".sudeste")[1].style.stroke = "orange";
+    $(".sudeste")[1].style.strokeWidth = "2";
+    $(".sudeste")[2].style.stroke = "orange";
+    $(".sudeste")[2].style.strokeWidth = "2";
+    $(".sudeste")[3].style.stroke = "orange";
+    $(".sudeste")[3].style.strokeWidth = "4";
+})
+
+function atualizaRound() {
+    $.get(URL+"/jogo",function(rodada) {
+        $("#rodada")[0].innerHTML = rodada;
+    })
 }
