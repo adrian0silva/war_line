@@ -19,10 +19,12 @@ import br.com.unicesumar.war_line.modelo.Atribuicao;
 import br.com.unicesumar.war_line.modelo.Estado;
 import br.com.unicesumar.war_line.modelo.Jogada;
 import br.com.unicesumar.war_line.modelo.Jogador;
+import br.com.unicesumar.war_line.modelo.Jogo;
 import br.com.unicesumar.war_line.repository.AtribuicaoRepository;
 import br.com.unicesumar.war_line.repository.EstadoRepository;
 import br.com.unicesumar.war_line.repository.JogadaRepository;
 import br.com.unicesumar.war_line.repository.JogadorRepository;
+import br.com.unicesumar.war_line.repository.JogoRepository;
 
 @RequestMapping("/api/jogador")
 @RestController
@@ -41,6 +43,11 @@ public class JogadorController {
 	@Autowired
 	JogadaRepository jogadaRepository;
 
+	@Autowired
+	JogoRepository jogoRepository;
+	
+	
+	
 	@GetMapping("/pontos")
 	public Integer retornaPontosDoJogador() {
 		Jogador jogador = jogadorRepository.findById(Long.valueOf(1)).get();
@@ -72,7 +79,6 @@ public class JogadorController {
 
 		List<Atribuicao> listaAtribuicao = atribuicaoRepository.buscarAtribuicao(estado.getId());
 
-		System.out.println(listaAtribuicao.size());
 
 		if (listaAtribuicao.size() == 0) {
 			Atribuicao atribuicao = jogador.adicionarPontos(estado, 1);
@@ -89,7 +95,6 @@ public class JogadorController {
 			estadoRepository.save(estado);
 		}
 
-		System.out.println(estado.getNome());
 	}
 
 	@PostMapping("/{id}/jogadas")
@@ -101,9 +106,6 @@ public class JogadorController {
 
 		Estado estadoRecebe = estadoRepository.findById(jogada.getEstadoRecebe().getId()).get();
 
-		System.out.println("Valor da jogada!: " + jogada.getValor());
-
-		System.out.println("Valor do estado: " + estadoEnvia.getValor());
 
 		if (estadoEnvia.getId() == estadoRecebe.getId()) {
 			throw new RuntimeException("Voce nao pode mandar para o mesmo estado");
@@ -163,8 +165,6 @@ public class JogadorController {
 
 			computador.setPontos(computador.getPontos() - valorAleatorioParaAdicionar);
 
-			System.out.println(computador.getPontos());
-			System.out.println(valorAleatorioParaAdicionar);
 
 			jogadorRepository.save(computador);
 			estadoRepository.save(estadoAleatorio);
@@ -188,7 +188,6 @@ public class JogadorController {
 
 			estadoRecebe = estadoRepository.findById(Long.valueOf(idEscolhido)).get();
 
-			System.out.println("E ESTE ESTADO QUE RECEBE!" + estadoRecebe.getNome());
 
 			int valor = new Random().nextInt(estadoEnvia.getValor());
 
@@ -199,20 +198,25 @@ public class JogadorController {
 					estadoRecebe.getId());
 			if (jogadasEncontradas.size() == 0) {
 				jogadaDoComputador = new Jogada(estadoEnvia, estadoRecebe, valor);
-				jogadaRepository.save(jogadaDoComputador);
 				estadoRepository.save(estadoEnvia);
+				estadoRepository.save(estadoRecebe);
+				jogadaRepository.save(jogadaDoComputador);
+				//computador.adicionarJogada(jogadaDoComputador);
+				jogadorRepository.save(computador);
 			} else {
 				jogadaDoComputador = jogadasEncontradas.get(0);
 
 				jogadaDoComputador.setValor(jogadaDoComputador.getValor() + valor);
 
-				jogadaRepository.save(jogadaDoComputador);
-				computador.adicionarJogada(jogadaDoComputador);
-				jogadorRepository.save(computador);
 				estadoRepository.save(estadoEnvia);
+				estadoRepository.save(estadoRecebe);
+				jogadaRepository.save(jogadaDoComputador);
+				//computador.adicionarJogada(jogadaDoComputador);
+				jogadorRepository.save(computador);
 			}
 		} while (new Random().nextInt(computador.getEstados().size() + 1) == 1);
-
+		
+		
 	}
 
 	@PostMapping
@@ -281,11 +285,6 @@ public class JogadorController {
 	public void rodarJogadas(List<Jogada> jogadas) {
 
 		for (int a = 0; a < jogadas.size(); a++) {
-			System.out.println("Estado que envia: "+jogadas.get(a).getEstadoEnvia().getNome());
-			System.out.println("pontos: "+jogadas.get(a).getEstadoEnvia().getValor());
-			System.out.println("valor: " + jogadas.get(a).getValor());
-			System.out.println("Estado que recebe: "+jogadas.get(a).getEstadoRecebe().getNome());
-			System.out.println("pontos: "+jogadas.get(a).getEstadoRecebe().getValor());
 			
 			Jogada jogadaDestaPosicao = jogadas.get(a);
 			if (jogadaDestaPosicao.getEstadoEnvia().getJogador() == jogadaDestaPosicao.getEstadoRecebe().getJogador()) {
@@ -296,6 +295,8 @@ public class JogadorController {
 						.setValor(jogadaDestaPosicao.getEstadoRecebe().getValor() - jogadaDestaPosicao.getValor());
 			}
 			if(jogadaDestaPosicao.getEstadoRecebe().getValor() < 0) {
+				excluirProximasJogadas(jogadas,jogadaDestaPosicao.getEstadoRecebe(),a);
+				
 				System.out.println("RODA OU NAO RODA?");
 				jogadaDestaPosicao.getEstadoRecebe().setJogador(jogadaDestaPosicao.getEstadoEnvia().getJogador());
 				System.out.println(jogadaDestaPosicao.getEstadoEnvia().getJogador());
@@ -306,8 +307,40 @@ public class JogadorController {
 			estadoRepository.save(jogadaDestaPosicao.getEstadoRecebe());
 			
 		}
+		
+		Jogador jogador = jogadorRepository.findById(Long.valueOf(1)).get();
+		jogador.removerJogadas();
+		jogadorRepository.save(jogador);
+		Jogador computador = jogadorRepository.findById(Long.valueOf(2)).get();
+		computador.removerJogadas();
+		jogadorRepository.save(computador);
+		
+		jogadaRepository.deleteAll();
+		Jogo jogo = jogoRepository.findById(1).get();
+		
+		jogo.avancarRodada();
+		jogoRepository.save(jogo);
+	
+		comecarNovaRodada();
 	}
 
+	private void excluirProximasJogadas(List<Jogada> jogadas, Estado estadoDominado, int posicao) {
+		for(int a = posicao;a < jogadas.size();a++ ) {
+			if(jogadas.get(a).getEstadoEnvia().getId() == estadoDominado.getId()) {
+				jogadaRepository.delete(jogadas.get(a));
+			}
+		}
+	}
+
+	public void comecarNovaRodada() {
+		Jogador jogador = jogadorRepository.findById(Long.valueOf(1)).get();
+		jogador.setPontos(5);
+		jogadorRepository.save(jogador);
+		Jogador computador = jogadorRepository.findById(Long.valueOf(2)).get();
+		computador.setPontos(5);
+		jogadorRepository.save(computador);
+	}
+	
 	public boolean matrizDeAdjacencia(Long estadoEnviaId, Long estadoRecebeId) {
 		boolean matriz[][] = new boolean[28][28];
 

@@ -74,4 +74,8 @@ public class Jogador {
 	public void adicionarJogada(Jogada jogada) {
 		this.jogadas.add(jogada);
 	}
+
+	public void removerJogadas() {
+		this.jogadas = null;
+	}
 }

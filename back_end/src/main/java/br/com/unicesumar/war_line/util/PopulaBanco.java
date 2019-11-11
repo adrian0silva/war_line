@@ -11,8 +11,10 @@ import br.com.unicesumar.war_line.controller.JogadaController;
 import br.com.unicesumar.war_line.controller.JogadorController;
 import br.com.unicesumar.war_line.modelo.Estado;
 import br.com.unicesumar.war_line.modelo.Jogador;
+import br.com.unicesumar.war_line.modelo.Jogo;
 import br.com.unicesumar.war_line.repository.EstadoRepository;
 import br.com.unicesumar.war_line.repository.JogadorRepository;
+import br.com.unicesumar.war_line.repository.JogoRepository;
 
 @Component
 public class PopulaBanco {
@@ -22,9 +24,16 @@ public class PopulaBanco {
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+
+	@Autowired
+	private JogoRepository jogoRepository;
 		
 	@EventListener
 	public void appReady(ApplicationReadyEvent event) {		
+		
+		Jogo jogo = new Jogo();
+		jogoRepository.save(jogo);
 		
 		Estado ac = new Estado("AC","Acre", 2);
 		Estado al = new Estado("AL","Alagoas", 2);
@@ -75,14 +84,14 @@ public class PopulaBanco {
 		jogadorRepository.save(computador);		
 		
 		
-		
+		/*
 		for(int linha = 1;linha < 28;linha++) {
 			for(int coluna = 1;coluna < 28;coluna++) {
 				boolean temAdjacencia = new JogadorController().matrizDeAdjacencia(Long.valueOf(linha), Long.valueOf(coluna));
 				
 				System.out.println(estadoRepository.findById(Long.valueOf(linha)).get().getNome() + " tem adjacencia com " + estadoRepository.findById(Long.valueOf(coluna)).get().getNome() + " ? " +  temAdjacencia);	
 			}
-		}
+		}*/
 	}
 
 }
