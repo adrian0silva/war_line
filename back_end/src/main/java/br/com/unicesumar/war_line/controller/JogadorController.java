@@ -344,16 +344,93 @@ public class JogadorController {
 	public boolean matrizDeAdjacencia(Long estadoEnviaId, Long estadoRecebeId) {
 		boolean matriz[][] = new boolean[28][28];
 
+		
+		//AC
 		matriz[1][4] = true;
 		matriz[1][22] = true;
 		matriz[2][17] = true;
 		matriz[2][26] = true;
 		matriz[2][5] = true;
 
-		// fazendo a do RJ primeiro
+		//BA
+		matriz[5][13] = true;
+		matriz[5][8] = true;
+		matriz[5][9] = true;
+		matriz[5][27] = true;
+		matriz[5][18] = true;
+		matriz[5]17] = true;
+		matriz[5][2] = true;
+		matriz[5][26] = true;
+
+		//DF
+		matriz[7][9] = true;
+		matriz[7][13] = true;
+
+		//ES
+		matriz[8][5] = true;
+		matriz[8][13] = true;
+		matriz[8][19] = true;
+
+		//GO
+		matriz[9][12] = true;
+		matriz[9][11] = true;
+		matriz[9][27] = true;
+		matriz[9][5] = true;
+		matriz[9][13] = true;
+		matriz[9][7] = true;
+
+		//MT
+		matriz[11][4] = true;
+		matriz[11][14] = true;
+		matriz[11][27] = true;
+		matriz[11][9] = true;
+		matriz[11][12] = true;
+		matriz[11][20] = true;
+
+		// MS
+		matriz[12][11] = true;
+		matriz[12][9] = true;
+		matriz[12][13] = true;
+		matriz[12][25] = true;
+		matriz[12][16] = true;
+
+		//MG
+		matriz[13]25] = true;
+		matriz[13][19] = true;
+		matriz[13][8] = true;
+		matriz[13][9] = true;
+		matriz[13][5] = true;
+		matriz[13][7] = true;
+		matriz[13][12] = true;
+
+		//PR
+		matriz[16][12] = true;
+		matriz[16][24] = true;
+		matriz[16][25] = true;
+
+		// fazendo a d o RJ primeiro
 		matriz[19][13] = true;
 		matriz[19][8] = true;
 		matriz[19][25] = true;
+
+		//SC
+		matriz[24][16] = true;
+		matriz[24][21] = true;
+
+		//SP
+		matriz[25][13] = true;
+		matriz[25][16] = true;
+		matriz[25][19] = true;
+		matriz[25][12] = true;
+
+		//TO
+		matriz[27][9] = true;
+		matriz[27][11] = true;
+		matriz[27][14] = true;
+		matriz[27][10] = true;
+		matriz[27][18] = true;
+		matriz[27][5] = true;
+	
 
 		return matriz[estadoEnviaId.intValue()][estadoRecebeId.intValue()];
 
