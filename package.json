@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/adrian0silva/war_line#readme",
   "dependencies": {
+<<<<<<< HEAD
     "create-react-app": "^3.3.0"
+=======
+    "create-react-app": "^3.3.0",
+    "express": "^4.17.1",
+    "react": "^16.12.0"
+>>>>>>> 9c8b2057276d8209448937ef9b27d5bb28a64135
   }
 }
