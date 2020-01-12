@@ -52,3 +52,18 @@
   top: 40%;
   left: 40%;
 }
+
+.neutro {
+  background: gray;
+  color: black;
+}
+
+.inimigo {
+  background: red;
+  color: wheat;
+}
+
+.jogador {
+  background: blue;
+  color: whitesmoke;
+}

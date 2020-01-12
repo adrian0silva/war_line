@@ -16,6 +16,11 @@ class Jogo extends Component {
         nome: "villa",
         valor: 5,
         dono: "jogador"
+      },
+      {
+        nome: "arsenal",
+        valor: 23,
+        dono: "neutro"
       }
     ]
   }
