@@ -18,7 +18,7 @@ const RenderizaBotoes = props => {
                 <button 
                     disabled={(territorio.dono !== "jogador")}
                     className={"btnTerritorio " + resultado()}
-                    
+                    onClick={(event) => props.acao(event,index)}
                     >{territorio.valor}</button>
             </div>
         )
@@ -34,10 +34,10 @@ const RenderizaBotoes = props => {
 class Botao extends Component {
 
     render() {
-        const { territorios } = this.props;
+        const { territorios, acao } = this.props;
 
         return (
-            <RenderizaBotoes territorios={territorios} />
+            <RenderizaBotoes territorios={territorios} acao={acao}/>
         )
     }
 }

@@ -6,6 +6,7 @@ import './App.css';
 class Jogo extends Component {
 
   state = {
+    meusPontos: 5,
     territorios: [
       {
         nome: "aston",
@@ -25,10 +26,45 @@ class Jogo extends Component {
     ]
   }
 
+  acao = (event,index) => {
+
+    console.log(this.state);
+    
+    
+    if(this.state.meusPontos > 0) {
+      return this.adicionarPontos(index);
+    }
+    return this.transferirPontos(index);
+  }
+ 
+  adicionarPontos = index => {
+    const { meusPontos } = this.state;
+
+    this.setState({
+      meusPontos: meusPontos - 1
+    })
+    
+    this.setState({ 
+      territorios: this.state.territorios.filter((territorio, posAtual) => {
+        if(posAtual === index) {
+          territorio.valor++;
+        }
+        return territorio;
+      })
+    })
+  }
+
+  transferirPontos = index => {
+    console.log("Aciona setas!");
+    
+    console.log("Abre modal!");
+    
+  }
+
   render() {
     return (
       <div className="container">
-        <Botao territorios={this.state.territorios} />
+        <Botao territorios={this.state.territorios} acao={this.acao}/>
       </div>
     )
   }
