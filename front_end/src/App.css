@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.meio {
+  margin: 4em;
+}
+
+.bloco {
+  background: #282c34;
+  border: 3px solid yellow;
+  height: 200px;
+}
+
+.btnTerritorio {
+  position: relative;
+  top: 40%;
+  left: 40%;
+}

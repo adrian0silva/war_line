@@ -15,11 +15,10 @@ class Jogo extends Component {
       {
         nome: "villa",
         valor: 5,
-        dono: "computador"
+        dono: "jogador"
       }
     ]
   }
-
 
   render() {
     return (

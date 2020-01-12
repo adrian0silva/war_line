@@ -6,14 +6,17 @@ const RenderizaBotoes = props => {
 
     const territorios = props.territorios.map((territorio, index) => {
         return (
-            <div className="col s4" key={index}>
-                <button >{territorio.valor}</button>
+            <div className="col s3 bloco" key={index}>
+                <button 
+                    disabled={(territorio.dono !== "jogador")}
+                    className="btnTerritorio"
+                    >{territorio.valor}</button>
             </div>
         )
     });
 
     return (
-        <div className="row">
+        <div className="row meio">
             {territorios}
         </ div>
     )
