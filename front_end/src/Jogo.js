@@ -5,7 +5,12 @@ import './App.css';
 
 class Jogo extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   state = {
+    rodada: 96959,
     meusPontos: 5,
     territorios: [
       {
@@ -26,27 +31,24 @@ class Jogo extends Component {
     ]
   }
 
-  acao = (event,index) => {
+  acao = (event, index) => {
 
-    console.log(this.state);
-    
-    
-    if(this.state.meusPontos > 0) {
+    if (this.state.meusPontos > 0) {
       return this.adicionarPontos(index);
     }
     return this.transferirPontos(index);
   }
- 
+
   adicionarPontos = index => {
     const { meusPontos } = this.state;
 
     this.setState({
       meusPontos: meusPontos - 1
     })
-    
-    this.setState({ 
+
+    this.setState({
       territorios: this.state.territorios.filter((territorio, posAtual) => {
-        if(posAtual === index) {
+        if (posAtual === index) {
           territorio.valor++;
         }
         return territorio;
@@ -56,15 +58,32 @@ class Jogo extends Component {
 
   transferirPontos = index => {
     console.log("Aciona setas!");
-    
+
     console.log("Abre modal!");
-    
+
+  }
+
+  async obtemRodada() {
+    const resposta = await fetch('http://localhost:3001/api/jogo');
+    const dados = await resposta.json();
+    this.setState({ 
+      rodada: dados[0].rodada
+     });
+
+  }
+
+  componentWillMount() {
+    this.obtemRodada();
   }
 
   render() {
     return (
-      <div className="container">
-        <Botao territorios={this.state.territorios} acao={this.acao}/>
+      <div>
+        <h5>Rodada atual: {this.state.rodada}</h5>
+        <div className="container">
+
+          <Botao territorios={this.state.territorios} acao={this.acao} />
+        </div>
       </div>
     )
   }

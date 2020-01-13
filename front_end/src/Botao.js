@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 const RenderizaBotoes = props => {
 
-    console.log(props);
-
     const territorios = props.territorios.map((territorio, index) => {
         const resultado = () => {
             if(territorio.dono === "jogador") {
