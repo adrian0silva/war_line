@@ -14,9 +14,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/warline', (err, db) => {
     console.log("Connected to database!");
 
     db.dropDatabase((err, result) => {
-        console.log("Error : " + err);
         if (err) throw err;
-        console.log("Operation Success ? " + result);
     })
 });
 requireDir('./src/models');
@@ -25,6 +23,4 @@ app.use("/api", require('./src/routes'));
 
 app.listen(3001);
 
-const jogo = require('./src/controllers/JogoController');
-
-jogo.create({ "rodada": 1 }, null);
+require('./src/utils/InicializaJogo');

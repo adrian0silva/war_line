@@ -66,6 +66,9 @@ class Jogo extends Component {
   async obtemRodada() {
     const resposta = await fetch('http://localhost:3001/api/jogo');
     const dados = await resposta.json();
+
+    console.log(dados);
+    
     this.setState({ 
       rodada: dados[0].rodada
      });
